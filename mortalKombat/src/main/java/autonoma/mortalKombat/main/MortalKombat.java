@@ -6,7 +6,9 @@ package autonoma.mortalKombat.main;
 
 /**
  *
- * @author juand
+ * @author Juan Diego
+ * @since 16-5-2025
+ * @version 1.0
  */
 public class MortalKombat {
 
