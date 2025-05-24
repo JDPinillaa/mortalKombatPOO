@@ -11,30 +11,37 @@ package autonoma.mortalKombat.models;
 import javax.swing.ImageIcon;
 
 public class Jugador {
+    private String nombre;
     private int vida;
     private int daño;
     private int velocidad;
     private int puntos;
     private ImageIcon imagen;
+    private int x;
+    private int y;
 
-    public Jugador(int vida, int daño, int velocidad, ImageIcon imagen) {
-        this.vida = vida;
-        this.daño = daño;
-        this.velocidad = velocidad;
-        this.imagen = imagen;
+    public Jugador(String nombre) {
+        this.nombre = nombre;
+        this.vida = 100;
+        this.daño = 20;
+        this.velocidad = 9;
+        this.imagen = new ImageIcon(getClass().getResource("/images/jugador.png"));
         this.puntos = 0;
+        this.x= 100;
+        this.y=100;
     }
 
     public void mover(String direccion) {
-        System.out.println("Jugador se mueve hacia " + direccion);
+        System.out.println(nombre + " se mueve hacia " + direccion);
     }
 
     public void recibirDaño(int cantidad) {
         vida -= cantidad;
+        if (vida < 0) vida = 0;
     }
 
     public void usarHabilidadEspecial() {
-        System.out.println("Habilidad especial usada");
+        System.out.println(nombre + " usa la habilidad especial");
     }
 
     public void mejorarVida() {
@@ -43,6 +50,19 @@ public class Jugador {
 
     public void mejorarDaño() {
         daño += 5;
+    }
+
+    public void ganarPuntos(int cantidad) {
+        puntos += cantidad;
+    }
+
+    // Getters y Setters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getPuntos() {
@@ -57,8 +77,16 @@ public class Jugador {
         return vida;
     }
 
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
     public int getDaño() {
         return daño;
+    }
+
+    public void setDaño(int daño) {
+        this.daño = daño;
     }
 
     public int getVelocidad() {
@@ -69,4 +97,3 @@ public class Jugador {
         return imagen;
     }
 }
-

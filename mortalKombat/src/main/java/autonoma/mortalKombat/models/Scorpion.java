@@ -8,6 +8,15 @@ package autonoma.mortalKombat.models;
  *
  * @author ACER
  */
-public class Scorpion {
+public class Scorpion extends Enemigo{
+
+    public Scorpion() {
+        super("Scorpion", 120, 30, 8,"/images/scorpion.png");
+    }
+
+    @Override
+    public void perseguir(Jugador jugador) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

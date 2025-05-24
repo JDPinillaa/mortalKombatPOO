@@ -8,6 +8,15 @@ package autonoma.mortalKombat.models;
  *
  * @author ACER
  */
-public class SubZero {
+public class SubZero extends Enemigo{
+
+    public SubZero() {
+       super("Sub Zero ", 150, 80, 9, "/images/subZero.png");
+    }
+
+    @Override
+    public void perseguir(Jugador jugador) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
