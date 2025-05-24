@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package autonoma.mortalKombat.models;
 
@@ -8,15 +9,17 @@ package autonoma.mortalKombat.models;
  *
  * @author ACER
  */
-public class SubZero extends Enemigo{
-
-    public SubZero() {
-       super("Sub Zero ", 150, 80, 9, "/images/subZero.png");
+public class SubZero extends Enemigo {
+    public SubZero(String nombre, int vida, int daño, int velocidad, String rutaImagen) {
+        super(nombre, vida, daño, velocidad, rutaImagen);
     }
 
     @Override
     public void perseguir(Jugador jugador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Lógica simple de persecución (puedes mejorarla)
+        if (jugador.getX() > this.x) this.x += velocidad;
+        if (jugador.getX() < this.x) this.x -= velocidad;
+        if (jugador.getY() > this.y) this.y += velocidad;
+        if (jugador.getY() < this.y) this.y -= velocidad;
     }
-    
 }
