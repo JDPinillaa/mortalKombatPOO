@@ -27,18 +27,20 @@ public class HiloMovimientoEnemigo extends Thread {
 
     @Override
     public void run() {
+        long ultimoAtaque = 0;
         while (activo) {
             try {
                 enemigo.perseguir(jugador);
 
-                // Solo ataca si está cerca
                 int distancia = (int) Math.hypot(jugador.getX() - enemigo.getX(), jugador.getY() - enemigo.getY());
-                int rangoAtaque = 40; // Debe coincidir con el de perseguir
-                if (distancia <= rangoAtaque) {
+                int rangoAtaque = 40;
+                long ahora = System.currentTimeMillis();
+                if (distancia <= rangoAtaque && ahora - ultimoAtaque >= 1000) { // 1000 ms = 1 segundo
                     enemigo.atacar(jugador);
                     jugador.recibirDaño(enemigo.getDaño());
-                    panelJuego.verificarDerrota(); // <--- notifica al panel
-                    panelJuego.repaint(); // <--- repinta el panel
+                    panelJuego.verificarDerrota();
+                    panelJuego.repaint();
+                    ultimoAtaque = ahora;
                 }
 
                 Thread.sleep(1000 / enemigo.getVelocidad());

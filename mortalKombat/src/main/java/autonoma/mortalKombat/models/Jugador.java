@@ -22,22 +22,19 @@ public class Jugador {
     private int y;
     private ImageIcon imagen;
     private final Random rand;
+    private int vidaMaxima; // Asegúrate de tener este atributo y actualizarlo al mejorar vida
 
     public Jugador() {
-        this.vida = 100;
+        this.vida = 400;
+        this.vidaMaxima = 400;
         this.daño = 20;
         this.velocidad = 5;
         this.puntos = 0;
         this.x = 100; // posición inicial en X
         this.y = 100; // posición inicial en Y
-        this.imagen = new ImageIcon("images/jugador.png");
+        this.imagen = new ImageIcon(getClass().getResource("/images/jugador.png"));
         this.rand = new Random();
     }
-
-    
-
-
-    
 
     // Mueve según dirección y limita dentro del panel
     public void mover(String direccion, int anchoPanel, int altoPanel) {
@@ -67,9 +64,16 @@ public class Jugador {
         this.setY(nuevoY);
     }
 
-    public void mejorarVida() { vida += 20; }
+    public void mejorarVida() { 
+        vida += 20; 
+        vidaMaxima += 20; // Aumenta la vida máxima al mejorar vida
+    }
     public void mejorarDaño() { daño += 5; }
     public void ganarPuntos(int cantidad) { puntos += cantidad; }
+
+    public void restablecerVida() {
+        this.vida = this.vidaMaxima;
+    }
 
     // Getters y setters
     public int getX() { return x; }

@@ -11,7 +11,7 @@ package autonoma.mortalKombat.models;
  */
 public class SubZero extends Enemigo {
     public SubZero() {
-        super("Sub Zero", 140, 60, 6, "/images/subZero.png");
+        super("Sub Zero", 1400, 60, 5, "/images/subZero.png");
     }
 
     @Override

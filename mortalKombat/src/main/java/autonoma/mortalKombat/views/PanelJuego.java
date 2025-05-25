@@ -50,6 +50,7 @@ public class PanelJuego extends JPanel {
         setDoubleBuffered(true);
         setFocusable(true);
         requestFocusInWindow();
+        setPreferredSize(new java.awt.Dimension(1300, 900)); // Cambia a las dimensiones que quieras
 
         hiloEnemigo = new HiloMovimientoEnemigo(enemigo, jugador, this);
         hiloEnemigo.start();
@@ -65,14 +66,31 @@ public class PanelJuego extends JPanel {
                     case KeyEvent.VK_A: dir = "A"; break;
                     case KeyEvent.VK_D: dir = "D"; break;
                     case KeyEvent.VK_Q:
-                        // Volver a la pantalla de inicio
+                        if (hiloEnemigo != null) hiloEnemigo.detener();
                         javax.swing.SwingUtilities.getWindowAncestor(PanelJuego.this).dispose();
                         new autonoma.mortalKombat.views.PantallaDeInicio(simulador).setVisible(true);
-                        return; // Salir para no mover al jugador
-                        
+                        return;
                     case KeyEvent.VK_E:
                         jugador.usarHabilidadEspecial(getWidth(), getHeight());
                         repaint();
+                        break;
+                    case KeyEvent.VK_SPACE:
+                        if (juegoTerminado) return;
+                        if (enemigo != null) {
+                            int jugadorCentroX = jugador.getX() + jugador.getImagen().getIconWidth() / 2;
+                            int jugadorCentroY = jugador.getY() + jugador.getImagen().getIconHeight() / 2;
+                            int enemigoCentroX = enemigo.getX() + enemigo.getImagen().getIconWidth() / 2;
+                            int enemigoCentroY = enemigo.getY() + enemigo.getImagen().getIconHeight() / 2;
+                            int distancia = (int) Math.hypot(jugadorCentroX - enemigoCentroX, jugadorCentroY - enemigoCentroY);
+                            int rangoAtaque = 200; // Ajusta el rango si lo deseas
+                            if (distancia <= rangoAtaque) {
+                                enemigo.recibirDaño(jugador.getDaño());
+                                verificarVictoria();
+                                repaint();
+                            } else {
+                                System.out.println("¡Estás demasiado lejos para atacar!");
+                            }
+                        }
                         break;
                 }
                 if (dir != null) {
@@ -86,16 +104,20 @@ public class PanelJuego extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (juegoTerminado) return; // <--- Bloquea ataques si ya terminó
+                if (juegoTerminado) return;
                 if (enemigo != null) {
-                    int ex = enemigo.getX();
-                    int ey = enemigo.getY();
-                    int ew = enemigo.getImagen().getIconWidth();
-                    int eh = enemigo.getImagen().getIconHeight();
-                    if (e.getX() >= ex && e.getX() <= ex + ew && e.getY() >= ey && e.getY() <= ey + eh) {
+                    int jugadorCentroX = jugador.getX() + jugador.getImagen().getIconWidth() / 2;
+                    int jugadorCentroY = jugador.getY() + jugador.getImagen().getIconHeight() / 2;
+                    int enemigoCentroX = enemigo.getX() + enemigo.getImagen().getIconWidth() / 2;
+                    int enemigoCentroY = enemigo.getY() + enemigo.getImagen().getIconHeight() / 2;
+                    int distancia = (int) Math.hypot(jugadorCentroX - enemigoCentroX, jugadorCentroY - enemigoCentroY);
+                    int rangoAtaque = 200; // Ajusta si quieres
+                    if (distancia <= rangoAtaque) {
                         enemigo.recibirDaño(jugador.getDaño());
                         verificarVictoria();
                         repaint();
+                    } else {
+                        System.out.println("¡Estás demasiado lejos para atacar!");
                     }
                 }
             }

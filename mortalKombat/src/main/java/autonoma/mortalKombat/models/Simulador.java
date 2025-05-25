@@ -60,13 +60,15 @@ public class Simulador {
             throw new NivelBloqueadoException("¡Debes superar el nivel anterior para acceder a este!");
         }
 
+        // Restablecer la vida del jugador al valor base o al valor mejorado
+        jugador.restablecerVida();
+
         switch (nivel) {
             case 1:
                 enemigo = new JohnnyCage();
                 break;
             case 2:
                 enemigo = new Scorpion();
-                
                 break;
             case 3:
                 enemigo = new SubZero();
@@ -81,11 +83,6 @@ public class Simulador {
         if (hiloEnemigo != null && hiloEnemigo.isAlive()) {
             hiloEnemigo.interrupt();
         }
-
-        // Iniciar el hilo de movimiento del enemigo
-        // HiloMovimientoEnemigo hilo = new HiloMovimientoEnemigo(enemigo, jugador);
-        // hiloEnemigo = new Thread(hilo);
-        // hiloEnemigo.start();
     }
 
     public Jugador getJugador() {

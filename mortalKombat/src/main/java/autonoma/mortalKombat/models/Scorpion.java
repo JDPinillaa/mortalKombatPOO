@@ -11,7 +11,7 @@ package autonoma.mortalKombat.models;
 public class Scorpion extends Enemigo{
 
     public Scorpion() {
-        super("Scorpion", 120, 30, 4,"/images/scorpion.png");
+        super("Scorpion", 720, 30, 3,"/images/scorpion.png");
     }
 
     @Override

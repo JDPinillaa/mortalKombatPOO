@@ -11,7 +11,7 @@ package autonoma.mortalKombat.models;
 public class JohnnyCage extends Enemigo {
 
     public JohnnyCage(){
-        super("Johnny Cage", 100, 15, 5, "/images/johnnyCage.png");
+        super("Johnny Cage", 500, 15, 4, "/images/johnnyCage.png");
     }
     @Override
     public void perseguir(Jugador jugador) {
