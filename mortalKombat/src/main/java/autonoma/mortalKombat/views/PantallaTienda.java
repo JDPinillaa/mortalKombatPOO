@@ -7,6 +7,7 @@ package autonoma.mortalKombat.views;
 import autonoma.mortalKombat.models.Simulador;
 import autonoma.mortalKombat.models.Jugador;
 import autonoma.mortalKombat.models.Tienda;
+import autonoma.mortalKombat.exceptions.PuntosInsuficientesException;
 
 /**
  *
@@ -146,7 +147,11 @@ public class PantallaTienda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mejorarVidaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mejorarVidaButtonActionPerformed
-        simulador.getTienda().comprarMejoraVida(simulador.getJugador());
+        try {
+            simulador.getTienda().comprarMejoraVida(simulador.getJugador());
+        } catch (PuntosInsuficientesException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "Puntos insuficientes", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
         actualizarPuntos();
     }//GEN-LAST:event_mejorarVidaButtonActionPerformed
 

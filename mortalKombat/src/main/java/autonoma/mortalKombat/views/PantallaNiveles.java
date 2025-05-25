@@ -83,18 +83,28 @@ public class PantallaNiveles extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nivel1ButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        simulador.seleccionarNivel(1);
+        abrirBatalla(1);
     }
 
     private void nivel2ButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        simulador.seleccionarNivel(2);
+        abrirBatalla(2);
     }
 
-    private void nivel3ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nivel3ButtonMouseClicked
-        simulador.seleccionarNivel(3);
-    }//GEN-LAST:event_nivel3ButtonMouseClicked
+    private void nivel3ButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
+        abrirBatalla(3);
+    }                                          
 
-   
+    private void abrirBatalla(int nivel) {
+        try {
+            simulador.seleccionarNivel(nivel);
+            CampoBatalla batalla = new CampoBatalla(nivel, simulador);
+            batalla.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            // Si usas NivelBloqueadoException, puedes mostrar un mensaje aquí
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "Nivel bloqueado", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel nivel1Button;

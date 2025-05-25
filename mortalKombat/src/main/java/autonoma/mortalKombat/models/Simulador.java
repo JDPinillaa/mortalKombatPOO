@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package autonoma.mortalKombat.models;
-
+import autonoma.mortalKombat.exceptions.NivelBloqueadoException;
 import javax.swing.JOptionPane;
 
 import autonoma.mortalKombat.utils.ArchivoProgreso;
@@ -28,7 +28,7 @@ public class Simulador {
         cargarProgreso();
     }
 
-    public void iniciarJuego() {
+    public void iniciarJuego() throws NivelBloqueadoException {
         System.out.println("¡Bienvenido al juego!");
         seleccionarNivel(nivelDesbloqueado); // Carga el nivel más alto desbloqueado por defecto
     }
@@ -58,13 +58,9 @@ public class Simulador {
         archivoProgreso.guardarMejoras(jugador.getVida(), jugador.getDaño());
     }
 
-    public void seleccionarNivel(int nivel) {
+    public void seleccionarNivel(int nivel) throws NivelBloqueadoException {
         if (nivel > nivelDesbloqueado) {
-            JOptionPane.showMessageDialog(null, 
-                "¡Debes superar el nivel anterior para acceder a este!", 
-                "Nivel bloqueado", 
-                JOptionPane.WARNING_MESSAGE);
-            return;
+            throw new NivelBloqueadoException("¡Debes superar el nivel anterior para acceder a este!");
         }
 
         switch (nivel) {
@@ -93,8 +89,6 @@ public class Simulador {
         hiloEnemigo = new Thread(hilo);
         hiloEnemigo.start();
     }
-
-    
 
     public Jugador getJugador() {
         return jugador;
