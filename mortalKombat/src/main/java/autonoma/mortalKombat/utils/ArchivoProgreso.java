@@ -63,9 +63,9 @@ public class ArchivoProgreso {
         return 0;
     }
 
-    public void guardarMejoras(int vida, int daño) {
+    public void guardarMejoras(int vidaMaxima, int daño) {
         Map<String, String> datos = leerDatosExistentes();
-        datos.put("vida", String.valueOf(vida));
+        datos.put("vidaMaxima", String.valueOf(vidaMaxima));
         datos.put("daño", String.valueOf(daño));
         guardarDatos(datos);
     }
@@ -74,8 +74,8 @@ public class ArchivoProgreso {
         Map<String, String> datos = leerDatosExistentes();
         Map<String, Integer> mejoras = new HashMap<>();
 
-        if (datos.containsKey("vida")) {
-            mejoras.put("vida", Integer.parseInt(datos.get("vida")));
+        if (datos.containsKey("vidaMaxima")) {
+            mejoras.put("vidaMaxima", Integer.parseInt(datos.get("vidaMaxima")));
         }
         if (datos.containsKey("daño")) {
             mejoras.put("daño", Integer.parseInt(datos.get("daño")));

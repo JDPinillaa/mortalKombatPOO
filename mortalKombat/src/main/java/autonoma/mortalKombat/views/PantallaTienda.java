@@ -64,8 +64,12 @@ public class PantallaTienda extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(153, 153, 0));
         jLabel1.setText("Tienda");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 153, 0));
         jLabel2.setText("Puntos Actuales:");
 
+        puntosActualesLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        puntosActualesLabel.setForeground(new java.awt.Color(153, 153, 0));
         puntosActualesLabel.setText("0");
 
         mejorarVidaButton.setBackground(new java.awt.Color(153, 153, 0));

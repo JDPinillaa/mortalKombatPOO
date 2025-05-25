@@ -125,5 +125,7 @@ public class Jugador {
     public void setPuntos(int puntos) { this.puntos = puntos; }
     public void setVida(int vida) { this.vida = vida; }
     public void setDaño(int daño) { this.daño = daño; }
+    public int getVidaMaxima() { return vidaMaxima; }
+    public void setVidaMaxima(int vidaMaxima) { this.vidaMaxima = vidaMaxima; }
 }
 

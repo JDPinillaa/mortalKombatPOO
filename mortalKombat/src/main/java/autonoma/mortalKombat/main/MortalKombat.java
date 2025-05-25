@@ -6,12 +6,12 @@ package autonoma.mortalKombat.main;
 
 import autonoma.mortalKombat.models.Simulador;
 
-/**
+/** 
  *
  * @author Juan Diego
  * @since 16-5-2025
  * @version 1.0
- */
+ */ 
 public class MortalKombat {
 
     public static void main(String[] args) {

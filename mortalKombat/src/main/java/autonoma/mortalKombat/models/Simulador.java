@@ -57,8 +57,9 @@ public class Simulador {
 
         var mejoras = archivoProgreso.leerMejoras();
         if (mejoras != null) {
-            jugador.setVida(mejoras.getOrDefault("vida", jugador.getVida()));
-            jugador.setDaño(mejoras.getOrDefault("daño", jugador.getDaño()));
+            if (mejoras.containsKey("vidaMaxima")) jugador.setVidaMaxima(mejoras.get("vidaMaxima"));
+            if (mejoras.containsKey("daño")) jugador.setDaño(mejoras.get("daño"));
+            jugador.restablecerVida(); // Para que la vida actual sea igual a la máxima al cargar
         }
 
         System.out.println("Progreso cargado. Nivel desbloqueado: " + nivelDesbloqueado);
@@ -77,7 +78,7 @@ public class Simulador {
         }
 
         archivoProgreso.guardarPuntos(jugador.getPuntos());
-        archivoProgreso.guardarMejoras(jugador.getVida(), jugador.getDaño());
+        archivoProgreso.guardarMejoras(jugador.getVidaMaxima(), jugador.getDaño());
     }
 
     /**
