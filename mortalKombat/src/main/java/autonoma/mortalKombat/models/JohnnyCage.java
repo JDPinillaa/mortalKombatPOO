@@ -15,7 +15,16 @@ public class JohnnyCage extends Enemigo {
     }
     @Override
     public void perseguir(Jugador jugador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        int distancia = (int) Math.hypot(jugador.getX() - this.x, jugador.getY() - this.y);
+        int rangoAtaque = 40; // Puedes ajustar este valor
+
+        if (distancia > rangoAtaque) {
+        // Movimiento simple hacia el jugador
+            if (jugador.getX() > this.x) this.x += velocidad;
+            if (jugador.getX() < this.x) this.x -= velocidad;
+            if (jugador.getY() > this.y) this.y += velocidad;
+            if (jugador.getY() < this.y) this.y -= velocidad;
+        }
+    }    
     
 }

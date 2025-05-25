@@ -4,16 +4,17 @@
  */
 package autonoma.mortalKombat.views;
 
+import autonoma.mortalKombat.models.Simulador;
+
 /**
  *
  * @author juand
  */
 public class PantallaNiveles extends javax.swing.JFrame {
+    private Simulador simulador;
 
-    /**
-     * Creates new form PantallaNiveles
-     */
-    public PantallaNiveles() {
+    public PantallaNiveles(Simulador simulador) {
+        this.simulador = simulador;
         initComponents();
     }
 
@@ -26,31 +27,31 @@ public class PantallaNiveles extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        nivel1Button = new javax.swing.JLabel();
+        nivel2Button = new javax.swing.JLabel();
+        nivel3Button = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nivel1.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        nivel1Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nivel1.png"))); // NOI18N
+        nivel1Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                nivel1ButtonMouseClicked(evt);
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nivel2.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        nivel2Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nivel2.png"))); // NOI18N
+        nivel2Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                nivel2ButtonMouseClicked(evt);
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nivel3.png"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        nivel3Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nivel3.png"))); // NOI18N
+        nivel3Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                nivel3ButtonMouseClicked(evt);
             }
         });
 
@@ -60,11 +61,11 @@ public class PantallaNiveles extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addComponent(jLabel1)
+                .addComponent(nivel1Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(nivel2Button)
                 .addGap(44, 44, 44)
-                .addComponent(jLabel3)
+                .addComponent(nivel3Button)
                 .addGap(49, 49, 49))
         );
         layout.setVerticalGroup(
@@ -72,65 +73,32 @@ public class PantallaNiveles extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(190, 190, 190)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(nivel3Button)
+                    .addComponent(nivel2Button)
+                    .addComponent(nivel1Button))
                 .addContainerGap(210, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel1MouseClicked
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel3MouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PantallaNiveles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PantallaNiveles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PantallaNiveles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PantallaNiveles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PantallaNiveles().setVisible(true);
-            }
-        });
+    private void nivel1ButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
+        simulador.seleccionarNivel(1);
     }
 
+    private void nivel2ButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
+        simulador.seleccionarNivel(2);
+    }
+
+    private void nivel3ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nivel3ButtonMouseClicked
+        simulador.seleccionarNivel(3);
+    }//GEN-LAST:event_nivel3ButtonMouseClicked
+
+   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel nivel1Button;
+    private javax.swing.JLabel nivel2Button;
+    private javax.swing.JLabel nivel3Button;
     // End of variables declaration//GEN-END:variables
 }

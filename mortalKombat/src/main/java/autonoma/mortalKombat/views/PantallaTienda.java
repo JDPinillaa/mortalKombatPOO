@@ -4,17 +4,37 @@
  */
 package autonoma.mortalKombat.views;
 
+import autonoma.mortalKombat.models.Simulador;
+import autonoma.mortalKombat.models.Jugador;
+import autonoma.mortalKombat.models.Tienda;
+
 /**
  *
  * @author juand
  */
 public class PantallaTienda extends javax.swing.JFrame {
+    private Simulador simulador;
 
     /**
      * Creates new form PantallaTienda
      */
-    public PantallaTienda() {
+    public PantallaTienda(Simulador simulador) {
+        this.simulador = simulador;
         initComponents();
+        actualizarPuntos();
+
+        // Acción para el botón confirmar
+        confirmarCambiosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PantallaDeInicio inicio = new PantallaDeInicio(simulador);
+                inicio.setVisible(true);
+                dispose(); // Cierra la tienda
+            }
+        });
+    }
+
+    private void actualizarPuntos() {
+        puntosActualesLabel.setText(String.valueOf(simulador.getJugador().getPuntos()));
     }
 
     /**
@@ -125,48 +145,20 @@ public class PantallaTienda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void aumentarDañoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentarDañoButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aumentarDañoButtonActionPerformed
-
     private void mejorarVidaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mejorarVidaButtonActionPerformed
-        // TODO add your handling code here:
+        simulador.getTienda().comprarMejoraVida(simulador.getJugador());
+        actualizarPuntos();
     }//GEN-LAST:event_mejorarVidaButtonActionPerformed
+
+    private void aumentarDañoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentarDañoButtonActionPerformed
+        simulador.getTienda().comprarMejoraDaño(simulador.getJugador());
+        actualizarPuntos();
+    }//GEN-LAST:event_aumentarDañoButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PantallaTienda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PantallaTienda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PantallaTienda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PantallaTienda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PantallaTienda().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aumentarDañoButton;

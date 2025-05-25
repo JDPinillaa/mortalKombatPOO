@@ -4,7 +4,8 @@
  */
 package autonoma.mortalKombat.utils;
 
-import autonoma.mortalKombat.models.*;
+import autonoma.mortalKombat.models.Enemigo;
+import autonoma.mortalKombat.models.Jugador;
 
 /**
  *
@@ -25,13 +26,15 @@ public class HiloMovimientoEnemigo extends Thread {
     public void run() {
         while (activo) {
             try {
-                // El enemigo se mueve persiguiendo al jugador
                 enemigo.perseguir(jugador);
 
-                // El enemigo ataca si está cerca
-                enemigo.atacar(jugador);
+                // Solo ataca si está cerca
+                int distancia = (int) Math.hypot(jugador.getX() - enemigo.getX(), jugador.getY() - enemigo.getY());
+                int rangoAtaque = 40; // Debe coincidir con el de perseguir
+                if (distancia <= rangoAtaque) {
+                    enemigo.atacar(jugador);
+                }
 
-                // Controla la frecuencia de movimiento según la velocidad del enemigo
                 Thread.sleep(1000 / enemigo.getVelocidad());
             } catch (InterruptedException e) {
                 System.out.println("Hilo de movimiento interrumpido.");

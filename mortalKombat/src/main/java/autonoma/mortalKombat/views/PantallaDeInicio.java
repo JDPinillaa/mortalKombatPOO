@@ -4,6 +4,7 @@
  */
 package autonoma.mortalKombat.views;
 
+import autonoma.mortalKombat.models.Simulador;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -13,13 +14,19 @@ import javax.swing.ImageIcon;
  * @author juand
  */
 public class PantallaDeInicio extends javax.swing.JFrame {
+    private Simulador simulador;
+
+    public PantallaDeInicio(Simulador simulador) {
+        this.simulador = simulador;
+        initComponents();
+        // Puedes actualizar la UI con datos del simulador si lo deseas
+    }
 
     /**
      * Creates new form PantallaDeInicio
      */
     public PantallaDeInicio() {
         initComponents();
-        // ¡No agregues nada más aquí!
     }
 
     /**

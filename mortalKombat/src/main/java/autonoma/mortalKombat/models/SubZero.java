@@ -10,16 +10,22 @@ package autonoma.mortalKombat.models;
  * @author ACER
  */
 public class SubZero extends Enemigo {
-    public SubZero(String nombre, int vida, int daño, int velocidad, String rutaImagen) {
-        super(nombre, vida, daño, velocidad, rutaImagen);
+    public SubZero() {
+        super("Sub Zero", 140, 80, 9, "/images/subZero.png");
     }
 
     @Override
     public void perseguir(Jugador jugador) {
-        // Lógica simple de persecución (puedes mejorarla)
-        if (jugador.getX() > this.x) this.x += velocidad;
-        if (jugador.getX() < this.x) this.x -= velocidad;
-        if (jugador.getY() > this.y) this.y += velocidad;
-        if (jugador.getY() < this.y) this.y -= velocidad;
+        int distancia = (int) Math.hypot(jugador.getX() - this.x, jugador.getY() - this.y);
+        int rangoAtaque = 40; // Puedes ajustar este valor
+
+        if (distancia > rangoAtaque) {
+            // Movimiento simple hacia el jugador
+            if (jugador.getX() > this.x) this.x += velocidad;
+            if (jugador.getX() < this.x) this.x -= velocidad;
+            if (jugador.getY() > this.y) this.y += velocidad;
+            if (jugador.getY() < this.y) this.y -= velocidad;
+        }
+        // Si está en rango, no se mueve más (solo ataca desde el hilo)
     }
 }

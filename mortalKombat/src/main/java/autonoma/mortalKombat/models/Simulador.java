@@ -4,7 +4,10 @@
  */
 package autonoma.mortalKombat.models;
 
-import autonoma.mortalKombat.utils.*;
+import javax.swing.JOptionPane;
+
+import autonoma.mortalKombat.utils.ArchivoProgreso;
+import autonoma.mortalKombat.utils.HiloMovimientoEnemigo;
 
 /**
  *
@@ -16,11 +19,12 @@ public class Simulador {
     private Enemigo enemigo;
     private Tienda tienda;
     private ArchivoProgreso archivoProgreso;
+    private Thread hiloEnemigo;
 
     public Simulador() {
         archivoProgreso = new ArchivoProgreso();
         tienda = new Tienda();
-        jugador = new Jugador("jugador");
+        jugador = new Jugador();
         cargarProgreso();
     }
 
@@ -56,35 +60,48 @@ public class Simulador {
 
     public void seleccionarNivel(int nivel) {
         if (nivel > nivelDesbloqueado) {
-            System.out.println("¡Debes superar el nivel anterior para acceder a este!");
+            JOptionPane.showMessageDialog(null, 
+                "¡Debes superar el nivel anterior para acceder a este!", 
+                "Nivel bloqueado", 
+                JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         switch (nivel) {
             case 1:
-                enemigo = new JohnnyCage();
+                enemigo = new Scorpion();
                 break;
             case 2:
-                enemigo = new Scorpion();
+                enemigo = new JohnnyCage();
                 break;
             case 3:
                 enemigo = new SubZero();
                 break;
             default:
-                System.out.println("Nivel inválido.");
-                return;
+                enemigo = new Scorpion();
         }
 
         System.out.println("Nivel " + nivel + " cargado: " + enemigo.getNombre());
 
+        // Detener hilo anterior si existe
+        if (hiloEnemigo != null && hiloEnemigo.isAlive()) {
+            hiloEnemigo.interrupt();
+        }
+
         // Iniciar el hilo de movimiento del enemigo
         HiloMovimientoEnemigo hilo = new HiloMovimientoEnemigo(enemigo, jugador);
-        Thread t = new Thread(hilo);
-        t.start();
+        hiloEnemigo = new Thread(hilo);
+        hiloEnemigo.start();
     }
 
-    public void abrirTienda() {
-        tienda.mostrarOpciones();
+    
+
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    public Tienda getTienda() {
+        return tienda;
     }
 }
 
