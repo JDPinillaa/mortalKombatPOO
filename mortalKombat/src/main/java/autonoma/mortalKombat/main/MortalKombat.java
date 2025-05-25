@@ -5,7 +5,6 @@
 package autonoma.mortalKombat.main;
 
 import autonoma.mortalKombat.models.Simulador;
-import autonoma.mortalKombat.views.PantallaNiveles;
 
 /**
  *
@@ -16,9 +15,8 @@ import autonoma.mortalKombat.views.PantallaNiveles;
 public class MortalKombat {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         Simulador simulador = new Simulador();
-        PantallaNiveles pantalla = new PantallaNiveles(simulador);
-        pantalla.setVisible(true);
+        autonoma.mortalKombat.views.PantallaDeInicio inicio = new autonoma.mortalKombat.views.PantallaDeInicio(simulador);
+        inicio.setVisible(true);
     }
 }

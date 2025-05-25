@@ -4,10 +4,12 @@
  */
 package autonoma.mortalKombat.views;
 
-import autonoma.mortalKombat.models.Simulador;
 import java.awt.Graphics;
 import java.awt.Image;
+
 import javax.swing.ImageIcon;
+
+import autonoma.mortalKombat.models.Simulador;
 
 /**
  *
@@ -18,8 +20,16 @@ public class PantallaDeInicio extends javax.swing.JFrame {
 
     public PantallaDeInicio(Simulador simulador) {
         this.simulador = simulador;
+        // Crea el panel con fondo como clase anónima
+        Panel = new javax.swing.JPanel() {
+            private Image imagen = new ImageIcon(getClass().getResource("/images/fondoPantallaInicial.jpg")).getImage();
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         initComponents();
-        // Puedes actualizar la UI con datos del simulador si lo deseas
     }
 
     /**
@@ -38,11 +48,10 @@ public class PantallaDeInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Panel = new PanelConFondo();
         playButton = new javax.swing.JLabel();
         scoreButton = new javax.swing.JLabel();
         shopButton = new javax.swing.JLabel();
-        ExtiButton = new javax.swing.JLabel();
+        exitButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,10 +76,10 @@ public class PantallaDeInicio extends javax.swing.JFrame {
             }
         });
 
-        ExtiButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botonSalir.png"))); // NOI18N
-        ExtiButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botonSalir.png"))); // NOI18N
+        exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ExtiButtonMouseClicked(evt);
+                exitButtonMouseClicked(evt);
             }
         });
 
@@ -85,7 +94,7 @@ public class PantallaDeInicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
                 .addComponent(shopButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ExtiButton))
+                .addComponent(exitButton))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +107,7 @@ public class PantallaDeInicio extends javax.swing.JFrame {
                             .addComponent(shopButton)
                             .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(scoreButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ExtiButton, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                .addComponent(exitButton, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addContainerGap(430, Short.MAX_VALUE))
         );
 
@@ -117,73 +126,33 @@ public class PantallaDeInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void playButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playButtonMouseClicked
-        // TODO add your handling code here:
+        PantallaNiveles niveles = new PantallaNiveles(simulador);
+        niveles.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_playButtonMouseClicked
 
     private void scoreButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scoreButtonMouseClicked
-        // TODO add your handling code here:
+        int puntos = simulador.getJugador().getPuntos();
+        javax.swing.JOptionPane.showMessageDialog(this, "Tus puntos actuales: " + puntos, "Puntos", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_scoreButtonMouseClicked
 
     private void shopButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shopButtonMouseClicked
-        // TODO add your handling code here:
+        PantallaTienda tienda = new PantallaTienda(simulador);
+        tienda.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_shopButtonMouseClicked
 
-    private void ExtiButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExtiButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ExtiButtonMouseClicked
+    private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitButtonMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PantallaDeInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PantallaDeInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PantallaDeInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PantallaDeInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PantallaDeInicio().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ExtiButton;
     private javax.swing.JPanel Panel;
+    private javax.swing.JLabel exitButton;
     private javax.swing.JLabel playButton;
     private javax.swing.JLabel scoreButton;
     private javax.swing.JLabel shopButton;
     // End of variables declaration//GEN-END:variables
-
-    class PanelConFondo extends javax.swing.JPanel {
-        private Image imagen;
-        public PanelConFondo() {
-            imagen = new ImageIcon(getClass().getResource("/images/fondoPantallaInicial.jpg")).getImage();
-        }
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
-        }
-    }
 }

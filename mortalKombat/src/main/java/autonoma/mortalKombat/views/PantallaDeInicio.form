@@ -45,7 +45,7 @@
                   <EmptySpace pref="388" max="32767" attributes="0"/>
                   <Component id="shopButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ExtiButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="exitButton" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -60,7 +60,7 @@
                               <Component id="shopButton" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="scoreButton" max="32767" attributes="0"/>
-                                  <Component id="ExtiButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="exitButton" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -101,14 +101,14 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="shopButtonMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="ExtiButton">
+        <Component class="javax.swing.JLabel" name="exitButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/botonSalir.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExtiButtonMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="exitButtonMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
