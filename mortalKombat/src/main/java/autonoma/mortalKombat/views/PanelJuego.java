@@ -21,6 +21,7 @@ import autonoma.mortalKombat.models.Enemigo;
 import autonoma.mortalKombat.models.Jugador;
 import autonoma.mortalKombat.models.Simulador;
 import autonoma.mortalKombat.utils.HiloMovimientoEnemigo;
+import autonoma.mortalKombat.utils.Reproductor;
 
 /**
  *
@@ -85,6 +86,7 @@ public class PanelJuego extends JPanel {
                             int rangoAtaque = 200; // Ajusta el rango si lo deseas
                             if (distancia <= rangoAtaque) {
                                 enemigo.recibirDaño(jugador.getDaño());
+                                Reproductor.reproducirSonido("/sounds/golpe.wav");
                                 verificarVictoria();
                                 repaint();
                             } else {
@@ -114,6 +116,7 @@ public class PanelJuego extends JPanel {
                     int rangoAtaque = 200; // Ajusta si quieres
                     if (distancia <= rangoAtaque) {
                         enemigo.recibirDaño(jugador.getDaño());
+                        Reproductor.reproducirSonido("/sounds/golpe.wav");
                         verificarVictoria();
                         repaint();
                     } else {
@@ -197,7 +200,8 @@ public class PanelJuego extends JPanel {
     private void verificarVictoria() {
         if (enemigo.getVida() <= 0 && !juegoTerminado) {
             juegoTerminado = true;
-            if (hiloEnemigo != null) hiloEnemigo.detener(); // <--- Detiene el hilo
+            if (hiloEnemigo != null) hiloEnemigo.detener();
+            Reproductor.reproducirSonido("/sounds/victory.wav");
             jugador.ganarPuntos(500);
             if (nivelActual == 3) {
                 JOptionPane.showMessageDialog(this,
@@ -225,7 +229,8 @@ public class PanelJuego extends JPanel {
     public void verificarDerrota() {
         if (jugador.getVida() <= 0 && !juegoTerminado) {
             juegoTerminado = true;
-            if (hiloEnemigo != null) hiloEnemigo.detener(); // <--- Detiene el hilo
+            if (hiloEnemigo != null) hiloEnemigo.detener();
+            Reproductor.reproducirSonido("/sounds/youLose.wav");
             JOptionPane.showMessageDialog(this,
                 "¡Has perdido! Intenta de nuevo.",
                 "Derrota",
