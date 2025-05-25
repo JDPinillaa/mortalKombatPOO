@@ -4,10 +4,7 @@
  */
 package autonoma.mortalKombat.models;
 import autonoma.mortalKombat.exceptions.NivelBloqueadoException;
-import javax.swing.JOptionPane;
-
 import autonoma.mortalKombat.utils.ArchivoProgreso;
-import autonoma.mortalKombat.utils.HiloMovimientoEnemigo;
 
 /**
  *
@@ -65,16 +62,17 @@ public class Simulador {
 
         switch (nivel) {
             case 1:
-                enemigo = new Scorpion();
+                enemigo = new JohnnyCage();
                 break;
             case 2:
-                enemigo = new JohnnyCage();
+                enemigo = new Scorpion();
+                
                 break;
             case 3:
                 enemigo = new SubZero();
                 break;
             default:
-                enemigo = new Scorpion();
+                enemigo = new JohnnyCage();
         }
 
         System.out.println("Nivel " + nivel + " cargado: " + enemigo.getNombre());
@@ -85,9 +83,9 @@ public class Simulador {
         }
 
         // Iniciar el hilo de movimiento del enemigo
-        HiloMovimientoEnemigo hilo = new HiloMovimientoEnemigo(enemigo, jugador);
-        hiloEnemigo = new Thread(hilo);
-        hiloEnemigo.start();
+        // HiloMovimientoEnemigo hilo = new HiloMovimientoEnemigo(enemigo, jugador);
+        // hiloEnemigo = new Thread(hilo);
+        // hiloEnemigo.start();
     }
 
     public Jugador getJugador() {
@@ -96,6 +94,10 @@ public class Simulador {
 
     public Tienda getTienda() {
         return tienda;
+    }
+
+    public Enemigo getEnemigo() {
+        return enemigo;
     }
 }
 

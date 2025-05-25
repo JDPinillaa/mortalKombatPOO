@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import autonoma.mortalKombat.models.Enemigo;
 import autonoma.mortalKombat.models.Jugador;
 import autonoma.mortalKombat.models.Simulador;
-import autonoma.mortalKombat.models.SubZero;
+import autonoma.mortalKombat.utils.HiloMovimientoEnemigo;
 
 /**
  *
@@ -35,10 +35,13 @@ public class PanelJuego extends JPanel {
     private int nivelActual;
     private Simulador simulador;
     private boolean juegoTerminado = false;
+    private HiloMovimientoEnemigo hiloEnemigo;
 
     public PanelJuego(int nivelActual, Simulador simulador) {
         this.nivelActual = nivelActual;
         this.simulador = simulador;
+        this.jugador = simulador.getJugador();
+        this.enemigo = simulador.getEnemigo();
         try {
             fondo = ImageIO.read(getClass().getResource("/images/campoBatalla.png"));
         } catch (IOException | IllegalArgumentException e) {
@@ -48,9 +51,8 @@ public class PanelJuego extends JPanel {
         setFocusable(true);
         requestFocusInWindow();
 
-        // Inicializa los personajes primero
-        jugador = new Jugador();
-        enemigo = new SubZero(); 
+        hiloEnemigo = new HiloMovimientoEnemigo(enemigo, jugador, this);
+        hiloEnemigo.start();
 
         // Luego agrega el KeyListener
         addKeyListener(new KeyAdapter() {
@@ -62,6 +64,11 @@ public class PanelJuego extends JPanel {
                     case KeyEvent.VK_S: dir = "S"; break;
                     case KeyEvent.VK_A: dir = "A"; break;
                     case KeyEvent.VK_D: dir = "D"; break;
+                    case KeyEvent.VK_Q:
+                        // Volver a la pantalla de inicio
+                        javax.swing.SwingUtilities.getWindowAncestor(PanelJuego.this).dispose();
+                        new autonoma.mortalKombat.views.PantallaDeInicio(simulador).setVisible(true);
+                        return; // Salir para no mover al jugador
                 }
                 if (dir != null) {
                     jugador.mover(dir, getWidth(), getHeight());
@@ -163,6 +170,7 @@ public class PanelJuego extends JPanel {
     private void verificarVictoria() {
         if (enemigo.getVida() <= 0 && !juegoTerminado) {
             juegoTerminado = true;
+            if (hiloEnemigo != null) hiloEnemigo.detener(); // <--- Detiene el hilo
             jugador.ganarPuntos(500);
             if (nivelActual == 3) {
                 JOptionPane.showMessageDialog(this,
@@ -181,7 +189,23 @@ public class PanelJuego extends JPanel {
             simulador.actualizarProgreso(Math.min(nivelActual + 1, 3));
 
             // Volver a la pantalla de niveles
-            javax.swing.SwingUtilities.getWindowAncestor(this).dispose(); // Cierra la ventana actual (PanelJuego)
+            javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
+            PantallaNiveles pantallaNiveles = new PantallaNiveles(simulador);
+            pantallaNiveles.setVisible(true);
+        }
+    }
+
+    public void verificarDerrota() {
+        if (jugador.getVida() <= 0 && !juegoTerminado) {
+            juegoTerminado = true;
+            if (hiloEnemigo != null) hiloEnemigo.detener(); // <--- Detiene el hilo
+            JOptionPane.showMessageDialog(this,
+                "¡Has perdido! Intenta de nuevo.",
+                "Derrota",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            // Volver a la pantalla de niveles
+            javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
             PantallaNiveles pantallaNiveles = new PantallaNiveles(simulador);
             pantallaNiveles.setVisible(true);
         }

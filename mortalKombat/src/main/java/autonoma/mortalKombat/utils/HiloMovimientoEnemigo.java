@@ -6,6 +6,7 @@ package autonoma.mortalKombat.utils;
 
 import autonoma.mortalKombat.models.Enemigo;
 import autonoma.mortalKombat.models.Jugador;
+import autonoma.mortalKombat.views.PanelJuego;
 
 /**
  *
@@ -15,10 +16,12 @@ public class HiloMovimientoEnemigo extends Thread {
     private Enemigo enemigo;
     private Jugador jugador;
     private boolean activo;
+    private PanelJuego panelJuego; // <--- referencia al panel
 
-    public HiloMovimientoEnemigo(Enemigo enemigo, Jugador jugador) {
+    public HiloMovimientoEnemigo(Enemigo enemigo, Jugador jugador, PanelJuego panelJuego) {
         this.enemigo = enemigo;
         this.jugador = jugador;
+        this.panelJuego = panelJuego;
         this.activo = true;
     }
 
@@ -33,6 +36,8 @@ public class HiloMovimientoEnemigo extends Thread {
                 int rangoAtaque = 40; // Debe coincidir con el de perseguir
                 if (distancia <= rangoAtaque) {
                     enemigo.atacar(jugador);
+                    jugador.recibirDaño(enemigo.getDaño());
+                    panelJuego.verificarDerrota(); // <--- notifica al panel
                 }
 
                 Thread.sleep(1000 / enemigo.getVelocidad());
