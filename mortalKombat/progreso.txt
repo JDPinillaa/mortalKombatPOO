@@ -1,4 +1,4 @@
-daño: 35
+daño: 90
 vida: 220
-puntos: 3500
+puntos: 500
 nivel: 3
