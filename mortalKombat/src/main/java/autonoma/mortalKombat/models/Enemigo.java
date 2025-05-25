@@ -25,8 +25,8 @@ public abstract class Enemigo {
         this.daño = daño;
         this.velocidad = velocidad;
         this.imagen = new ImageIcon(rutaImagen);
-        this.x=100;
-        this.y=100;
+        this.x=300;
+        this.y=300;
     }
 
     public void recibirDaño(int cantidad) {

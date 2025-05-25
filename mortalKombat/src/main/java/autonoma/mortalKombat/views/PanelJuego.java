@@ -69,6 +69,11 @@ public class PanelJuego extends JPanel {
                         javax.swing.SwingUtilities.getWindowAncestor(PanelJuego.this).dispose();
                         new autonoma.mortalKombat.views.PantallaDeInicio(simulador).setVisible(true);
                         return; // Salir para no mover al jugador
+                        
+                    case KeyEvent.VK_E:
+                        jugador.usarHabilidadEspecial(getWidth(), getHeight());
+                        repaint();
+                        break;
                 }
                 if (dir != null) {
                     jugador.mover(dir, getWidth(), getHeight());

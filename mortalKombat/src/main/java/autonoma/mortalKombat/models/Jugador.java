@@ -5,6 +5,7 @@
  */
 package autonoma.mortalKombat.models;
 
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,6 +20,7 @@ public class Jugador {
     private int x;
     private int y;
     private ImageIcon imagen;
+    private final Random rand;
 
     public Jugador() {
         this.vida = 100;
@@ -28,16 +30,13 @@ public class Jugador {
         this.x = 100; // posición inicial en X
         this.y = 100; // posición inicial en Y
         this.imagen = new ImageIcon("images/jugador.png");
+        this.rand = new Random();
     }
 
     
 
 
-    // Nuevo método para mover por desplazamiento
-    public void mover(int dx, int dy) {
-        this.x += dx;
-        this.y += dy;
-    }
+    
 
     // Mueve según dirección y limita dentro del panel
     public void mover(String direccion, int anchoPanel, int altoPanel) {
@@ -60,9 +59,11 @@ public class Jugador {
         if (vida < 0) vida = 0;
     }
 
-    public void usarHabilidadEspecial() {
-        System.out.println("Habilidad especial activada");
-        // Aquí puedes implementar el "teletransporte" o efecto visual
+    public void usarHabilidadEspecial(int anchoPanel, int altoPanel) {
+        int nuevoX = rand.nextInt(anchoPanel - imagen.getIconWidth());
+        int nuevoY = rand.nextInt(altoPanel - imagen.getIconHeight());
+        this.setX(nuevoX);
+        this.setY(nuevoY);
     }
 
     public void mejorarVida() { vida += 20; }
