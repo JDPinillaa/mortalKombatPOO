@@ -3,13 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package autonoma.mortalKombat.utils;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
- * @author ACER
+ * Clase utilitaria para gestionar la persistencia del progreso del jugador.
+ * Permite guardar y leer el nivel desbloqueado, los puntos y las mejoras
+ * (vida y daño) en un archivo de texto simple.
+ * 
+ * El archivo se llama "progreso.txt" y almacena los datos en formato clave:valor.
+ * 
+ * Métodos principales:
+ * - leerNivelDesbloqueado / guardarNivelDesbloqueado
+ * - leerPuntos / guardarPuntos
+ * - leerMejoras / guardarMejoras
+ * 
+ * @author Santiago
+ * @since 16-5-2025
+ * @version 1.0
  */
 public class ArchivoProgreso {
 

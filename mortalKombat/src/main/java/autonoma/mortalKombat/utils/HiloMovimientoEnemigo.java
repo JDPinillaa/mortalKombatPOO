@@ -9,15 +9,29 @@ import autonoma.mortalKombat.models.Jugador;
 import autonoma.mortalKombat.views.PanelJuego;
 
 /**
+ * Hilo encargado de mover al enemigo y gestionar sus ataques al jugador en tiempo real.
+ * El enemigo persigue al jugador y ataca automáticamente si está dentro del rango de ataque,
+ * respetando un tiempo de espera (cooldown) entre ataques.
+ * 
+ * Este hilo actualiza la posición del enemigo, verifica si el jugador ha sido derrotado
+ * y repinta el panel de juego.
  *
- * @author juand
+ * @author Juan Diego
+ * @since 16-5-2025
+ * @version 1.0
  */
 public class HiloMovimientoEnemigo extends Thread {
     private Enemigo enemigo;
     private Jugador jugador;
     private boolean activo;
-    private PanelJuego panelJuego; // <--- referencia al panel
+    private PanelJuego panelJuego; 
 
+    /**
+     * Crea un hilo para mover y gestionar los ataques del enemigo.
+     * @param enemigo Enemigo a controlar.
+     * @param jugador Jugador objetivo.
+     * @param panelJuego Panel de juego para repintar y verificar derrota.
+     */
     public HiloMovimientoEnemigo(Enemigo enemigo, Jugador jugador, PanelJuego panelJuego) {
         this.enemigo = enemigo;
         this.jugador = jugador;
@@ -51,6 +65,9 @@ public class HiloMovimientoEnemigo extends Thread {
         }
     }
 
+    /**
+     * Detiene la ejecución del hilo.
+     */
     public void detener() {
         activo = false;
     }

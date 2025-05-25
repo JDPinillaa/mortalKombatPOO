@@ -5,26 +5,17 @@
 package autonoma.mortalKombat.models;
 
 /**
- *
- * @author ACER
+ * Enemigo específico: Johnny Cage.
+ * Define los atributos iniciales de Johnny Cage.
+ * Hereda la lógica de movimiento y ataque de la clase base Enemigo.
+ * 
+ * @author Santiago
+ * @since 16-5-2025
+ * @version 1.0
  */
 public class JohnnyCage extends Enemigo {
 
-    public JohnnyCage(){
+    public JohnnyCage() {
         super("Johnny Cage", 500, 15, 4, "/images/johnnyCage.png");
     }
-    @Override
-    public void perseguir(Jugador jugador) {
-        int distancia = (int) Math.hypot(jugador.getX() - this.x, jugador.getY() - this.y);
-        int rangoAtaque = 40; // Puedes ajustar este valor
-
-        if (distancia > rangoAtaque) {
-        // Movimiento simple hacia el jugador
-            if (jugador.getX() > this.x) this.x += velocidad;
-            if (jugador.getX() < this.x) this.x -= velocidad;
-            if (jugador.getY() > this.y) this.y += velocidad;
-            if (jugador.getY() < this.y) this.y -= velocidad;
-        }
-    }    
-    
 }

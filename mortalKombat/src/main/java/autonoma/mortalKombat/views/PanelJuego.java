@@ -24,8 +24,19 @@ import autonoma.mortalKombat.utils.HiloMovimientoEnemigo;
 import autonoma.mortalKombat.utils.Reproductor;
 
 /**
+ * Panel principal donde se desarrolla la batalla entre el jugador y el enemigo.
+ * Gestiona el renderizado de los personajes, el fondo, la información en pantalla,
+ * la interacción por teclado y mouse, y la lógica de victoria/derrota.
+ * 
+ * Permite mover al jugador, atacar al enemigo, usar habilidades especiales,
+ * y muestra información relevante de ambos personajes.
+ * 
+ * También controla el hilo de movimiento del enemigo y la transición entre pantallas
+ * según el resultado de la batalla.
  *
- * @author ACER
+ * @author Santiago
+ * @since 24-5-2025
+ * @version 1.0
  */
 public class PanelJuego extends JPanel {
     private Image fondo;
@@ -38,6 +49,12 @@ public class PanelJuego extends JPanel {
     private boolean juegoTerminado = false;
     private HiloMovimientoEnemigo hiloEnemigo;
 
+    /**
+     * Crea el panel de juego, inicializando el fondo, los personajes y los listeners.
+     * 
+     * @param nivelActual Nivel actual de la partida.
+     * @param simulador   Instancia del simulador principal del juego.
+     */
     public PanelJuego(int nivelActual, Simulador simulador) {
         this.nivelActual = nivelActual;
         this.simulador = simulador;
@@ -56,7 +73,7 @@ public class PanelJuego extends JPanel {
         hiloEnemigo = new HiloMovimientoEnemigo(enemigo, jugador, this);
         hiloEnemigo.start();
 
-        // Luego agrega el KeyListener
+        // Listener para controlar el movimiento y acciones del jugador por teclado
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -102,7 +119,7 @@ public class PanelJuego extends JPanel {
             }
         });
 
-        // Ejemplo de interacción con el mouse (puedes personalizarlo)
+        // Listener para interacción con el mouse (ataque por cercanía)
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -126,6 +143,7 @@ public class PanelJuego extends JPanel {
             }
         });
 
+        // Listener para actualizar la posición del mouse (útil para mostrar información contextual)
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
@@ -135,6 +153,11 @@ public class PanelJuego extends JPanel {
         });
     }
 
+    /**
+     * Dibuja el fondo, los personajes y la información en pantalla.
+     * 
+     * @param g Contexto gráfico.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -185,18 +208,34 @@ public class PanelJuego extends JPanel {
         }
     }
 
+    /**
+     * Fuerza el repintado del panel.
+     */
     public void actualizar() {
         repaint();
     }
 
+    /**
+     * Obtiene la posición X actual del mouse sobre el panel.
+     * @return Coordenada X del mouse.
+     */
     public int getMouseX() {
         return mouseX;
     }
 
+    /**
+     * Obtiene la posición Y actual del mouse sobre el panel.
+     * @return Coordenada Y del mouse.
+     */
     public int getMouseY() {
         return mouseY;
     }
 
+    /**
+     * Verifica si el jugador ha ganado la batalla.
+     * Si es así, muestra el mensaje correspondiente, reproduce el sonido de victoria,
+     * otorga puntos y vuelve a la pantalla de niveles.
+     */
     private void verificarVictoria() {
         if (enemigo.getVida() <= 0 && !juegoTerminado) {
             juegoTerminado = true;
@@ -226,6 +265,11 @@ public class PanelJuego extends JPanel {
         }
     }
 
+    /**
+     * Verifica si el jugador ha sido derrotado.
+     * Si es así, muestra el mensaje correspondiente, reproduce el sonido de derrota
+     * y vuelve a la pantalla de niveles.
+     */
     public void verificarDerrota() {
         if (jugador.getVida() <= 0 && !juegoTerminado) {
             juegoTerminado = true;

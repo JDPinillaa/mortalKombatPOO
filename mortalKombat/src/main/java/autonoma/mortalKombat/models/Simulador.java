@@ -7,8 +7,16 @@ import autonoma.mortalKombat.exceptions.NivelBloqueadoException;
 import autonoma.mortalKombat.utils.ArchivoProgreso;
 
 /**
- *
- * @author ACER
+ * Clase principal que gestiona la lógica del juego Mortal Kombat.
+ * Se encarga de manejar el progreso del jugador, los niveles desbloqueados,
+ * la selección de enemigos, la tienda y la persistencia de datos.
+ * 
+ * Permite cargar y actualizar el progreso, seleccionar niveles, y acceder
+ * a los objetos principales del juego como el jugador, enemigo y tienda.
+ * 
+ * @author Santiago
+ * @version 1.0
+ * @since 2025-05-25
  */
 public class Simulador {
     private int nivelDesbloqueado;
@@ -18,6 +26,10 @@ public class Simulador {
     private ArchivoProgreso archivoProgreso;
     private Thread hiloEnemigo;
 
+    /**
+     * Crea un simulador e inicializa los componentes principales.
+     * Carga el progreso guardado del jugador.
+     */
     public Simulador() {
         archivoProgreso = new ArchivoProgreso();
         tienda = new Tienda();
@@ -25,11 +37,19 @@ public class Simulador {
         cargarProgreso();
     }
 
+    /**
+     * Inicia el juego cargando el nivel más alto desbloqueado.
+     * @throws NivelBloqueadoException si el nivel no está desbloqueado.
+     */
     public void iniciarJuego() throws NivelBloqueadoException {
         System.out.println("¡Bienvenido al juego!");
         seleccionarNivel(nivelDesbloqueado); // Carga el nivel más alto desbloqueado por defecto
     }
 
+    /**
+     * Carga el progreso del jugador desde el archivo de progreso.
+     * Incluye nivel desbloqueado, puntos y mejoras.
+     */
     public void cargarProgreso() {
         nivelDesbloqueado = archivoProgreso.leerNivelDesbloqueado();
         int puntosGuardados = archivoProgreso.leerPuntos();
@@ -44,6 +64,11 @@ public class Simulador {
         System.out.println("Progreso cargado. Nivel desbloqueado: " + nivelDesbloqueado);
     }
 
+    /**
+     * Actualiza el progreso del jugador, guardando el nivel superado,
+     * los puntos y las mejoras obtenidas.
+     * @param nivelSuperado Nivel que el jugador ha superado.
+     */
     public void actualizarProgreso(int nivelSuperado) {
         if (nivelSuperado > nivelDesbloqueado) {
             nivelDesbloqueado = nivelSuperado;
@@ -55,6 +80,12 @@ public class Simulador {
         archivoProgreso.guardarMejoras(jugador.getVida(), jugador.getDaño());
     }
 
+    /**
+     * Selecciona el nivel y crea el enemigo correspondiente.
+     * Restablece la vida del jugador y detiene el hilo anterior si existe.
+     * @param nivel Nivel a seleccionar.
+     * @throws NivelBloqueadoException si el nivel no está desbloqueado.
+     */
     public void seleccionarNivel(int nivel) throws NivelBloqueadoException {
         if (nivel > nivelDesbloqueado) {
             throw new NivelBloqueadoException("¡Debes superar el nivel anterior para acceder a este!");
@@ -85,14 +116,26 @@ public class Simulador {
         }
     }
 
+    /**
+     * Devuelve el jugador actual.
+     * @return Jugador.
+     */
     public Jugador getJugador() {
         return jugador;
     }
 
+    /**
+     * Devuelve la tienda del juego.
+     * @return Tienda.
+     */
     public Tienda getTienda() {
         return tienda;
     }
 
+    /**
+     * Devuelve el enemigo actual.
+     * @return Enemigo.
+     */
     public Enemigo getEnemigo() {
         return enemigo;
     }

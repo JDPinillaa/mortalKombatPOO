@@ -6,26 +6,17 @@
 package autonoma.mortalKombat.models;
 
 /**
- *
- * @author ACER
+ * Enemigo específico: SubZero.
+ * Define los atributos iniciales de SubZero.
+ * Hereda la lógica de movimiento y ataque de la clase base Enemigo.
+ * 
+ * @author Santiago
+ * @since 16-5-2025
+ * @version 1.0
  */
 public class SubZero extends Enemigo {
+
     public SubZero() {
         super("Sub Zero", 1400, 60, 5, "/images/subZero.png");
-    }
-
-    @Override
-    public void perseguir(Jugador jugador) {
-        int distancia = (int) Math.hypot(jugador.getX() - this.x, jugador.getY() - this.y);
-        int rangoAtaque = 40; // Puedes ajustar este valor
-
-        if (distancia > rangoAtaque) {
-            // Movimiento simple hacia el jugador
-            if (jugador.getX() > this.x) this.x += velocidad;
-            if (jugador.getX() < this.x) this.x -= velocidad;
-            if (jugador.getY() > this.y) this.y += velocidad;
-            if (jugador.getY() < this.y) this.y -= velocidad;
-        }
-        // Si está en rango, no se mueve más (solo ataca desde el hilo)
     }
 }

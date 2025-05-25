@@ -23,7 +23,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * 
  * @author juand
  * @version 1.0
- * @since 2025-25-05
+ * @since 2025-05-25
  */
 public class Reproductor {
     /**
