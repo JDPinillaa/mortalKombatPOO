@@ -6,6 +6,7 @@
 package autonoma.mortalKombat.models;
 
 import java.util.Random;
+
 import javax.swing.ImageIcon;
 
 /**
@@ -25,7 +26,7 @@ public class Jugador {
     public Jugador() {
         this.vida = 100;
         this.daño = 20;
-        this.velocidad = 9;
+        this.velocidad = 5;
         this.puntos = 0;
         this.x = 100; // posición inicial en X
         this.y = 100; // posición inicial en Y

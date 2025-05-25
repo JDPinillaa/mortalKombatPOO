@@ -38,6 +38,7 @@ public class HiloMovimientoEnemigo extends Thread {
                     enemigo.atacar(jugador);
                     jugador.recibirDaño(enemigo.getDaño());
                     panelJuego.verificarDerrota(); // <--- notifica al panel
+                    panelJuego.repaint(); // <--- repinta el panel
                 }
 
                 Thread.sleep(1000 / enemigo.getVelocidad());
